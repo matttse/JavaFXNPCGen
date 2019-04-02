@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import data.ListItem;
+import model.ListItem;
 /**
  *
  * @author tsemd
@@ -88,7 +88,11 @@ public class DatabaseController {
 
                     while(rs.next()) {
 
-                            list_from_db.add(new ListItem(rs.getString("item"), Integer.toString(rs.getInt("quant")), Double.toString(rs.getDouble("value")), Integer.toString(rs.getInt("prior"))));
+                          list_from_db.add(new ListItem(rs.getString("item")
+                                  , Double.toString(rs.getDouble("value"))
+                                  , Integer.toString(rs.getInt("prior"))
+                                  , rs.getString("description")
+                                  , Integer.toString(rs.getInt("quant"))));
                     }
 
                     return list_from_db;
