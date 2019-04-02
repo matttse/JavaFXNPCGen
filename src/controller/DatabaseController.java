@@ -37,11 +37,11 @@ public class DatabaseController {
     public void createTable(String table_name) {
 
             String sql_comm = "CREATE TABLE IF NOT EXISTS " + table_name +
-                                              " (item VARCHAR(255), " +
-                                              " (description VARCHAR(255), " +
-                                              " quant INTEGER, " +
-                                              " prior INTEGER, " +
-                                              " value DOUBLE)";
+                                              " (Item VARCHAR(255), " +
+                                              " (Description VARCHAR(255), " +
+                                              " Quant INTEGER, " +
+                                              " Prior INTEGER, " +
+                                              " Value DOUBLE)";
 
             try {
                     stmt.executeUpdate(sql_comm);
@@ -66,7 +66,7 @@ public class DatabaseController {
     //Method for removing data from a table
     public void removeRow(String item, String table_name) {
 
-            String sql_comm = "DELETE FROM " + table_name + " WHERE item = '" + item + "'";
+            String sql_comm = "DELETE FROM " + table_name + " WHERE Item = '" + item + "'";
 
             try {
                     stmt.executeUpdate(sql_comm);
@@ -81,18 +81,18 @@ public class DatabaseController {
 
             ArrayList<ListItem> list_from_db = new ArrayList<ListItem>();
 
-            String sql_comm = "SELECT item, quant, prior, value FROM " + table_name;
+            String sql_comm = "SELECT Item, Quant, Prior, Value FROM " + table_name;
 
             try {
                     ResultSet rs = stmt.executeQuery(sql_comm);
 
                     while(rs.next()) {
 
-                          list_from_db.add(new ListItem(rs.getString("item")
-                                  , Double.toString(rs.getDouble("value"))
-                                  , Integer.toString(rs.getInt("prior"))
-                                  , rs.getString("description")
-                                  , Integer.toString(rs.getInt("quant"))));
+                          list_from_db.add(new ListItem(rs.getString("Item")
+                                  , Double.toString(rs.getDouble("Value"))
+                                  , Integer.toString(rs.getInt("Prior"))
+                                  , rs.getString("Description")
+                                  , Integer.toString(rs.getInt("Quant"))));
                     }
 
                     return list_from_db;
