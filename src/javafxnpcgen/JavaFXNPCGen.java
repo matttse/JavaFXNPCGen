@@ -19,11 +19,6 @@ import javafx.stage.Stage;
  */
 public class JavaFXNPCGen extends Application {
 
-    public JavaFXNPCGen() {
-        ObservableList<String> availableChoices; 
-        availableChoices = FXCollections.observableArrayList("apples", "oranges");
-//        NumberOfNPCs.setItems(availableChoices);
-    }
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -33,11 +28,10 @@ public class JavaFXNPCGen extends Application {
         
         stage.setScene(scene);
         stage.show();
+        
+        
     }
     
-    
-    
-
     /**
      * @param args the command line arguments
      */

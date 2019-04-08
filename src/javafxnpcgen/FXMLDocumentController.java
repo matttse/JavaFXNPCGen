@@ -7,8 +7,11 @@ package javafxnpcgen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -24,17 +27,11 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Label label;
-    
-    @FXML
-    private Button GenerateNPCButton;
-    
-    @FXML
-    private Button ResetButton;
-    
+        
     @FXML
     private ComboBox<Integer> NumberOfNPCsSelect;
     @FXML
-    private ChoiceBox<Integer> LevelSelect;
+    private ComboBox<Integer> LevelSelect;
     @FXML
     private ChoiceBox<String> ClassSelect;
     @FXML
@@ -56,9 +53,28 @@ public class FXMLDocumentController implements Initializable {
         System.exit(0);
     }
     
+    @FXML
+    private void GenerateNPCButton(ActionEvent event) {
+        System.exit(0);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setData();
     }    
     
+    public void setData(){
+        // initialize clear
+        LevelSelect.getItems().clear();
+        ClassSelect.getItems().clear();
+        
+        // add items
+        LevelSelect.getItems().addAll(
+                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+        );
+        ClassSelect.getItems().addAll(
+        );
+        
+
+    }
 }
