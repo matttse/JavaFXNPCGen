@@ -67,6 +67,7 @@ public class FXMLDocumentController implements Initializable {
             
             Parent detailScene = loader.load();
             Stage stage = new Stage();
+            stage.setTitle("Character Details");
             stage.setScene(new Scene(detailScene));
             stage.show();
             

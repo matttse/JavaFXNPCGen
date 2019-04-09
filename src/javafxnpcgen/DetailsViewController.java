@@ -6,21 +6,15 @@
 package javafxnpcgen;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.GridPane;
 import service.NPC;
+import service.ListItem;
+import dao.DatabaseController;
 
 /**
  * FXML Controller class
@@ -28,8 +22,13 @@ import service.NPC;
  * @author tsemd
  */
 public class DetailsViewController implements Initializable {
-    private NPC selectionNPC;
     
+    int pri;
+    int quant;
+    double price;
+    String item;
+    String list_name_data;
+    private NPC selectionNPC;    
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
@@ -38,10 +37,24 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField charismaTextField;
     @FXML private TextField ArmorClass;
     @FXML private TextField HitPoints;
-    @FXML private TextField Speed;
-    @FXML private TextField Attacks;
     @FXML private TextField Name;
     @FXML private TextField Level;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {      
+        
+            //open the database connection
+            db.openConnection();
+        
+    } 
+    @FXML
+    private void exit(ActionEvent event) {
+        System.exit(0);
+    }
+
     public void initData(NPC npc) {        
         ArmorClass.setText(npc.getArmorClass());
         HitPoints.setText(npc.getHitPoints());
@@ -55,17 +68,12 @@ public class DetailsViewController implements Initializable {
         charismaTextField.setText(npc.getCharisma());
     }
     
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {      
-              
-        
-    } 
-    @FXML
-    private void exit(ActionEvent event) {
-        System.exit(0);
+    ArrayList<ListItem> itemList = new ArrayList<ListItem>();
+
+    DatabaseController db; //create new DatabaseController object
+
+    public DetailsViewController() {
+        db = new DatabaseController(); //initialize new DatabaseController object
+
     }
-    
 }

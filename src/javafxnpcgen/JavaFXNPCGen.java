@@ -26,7 +26,7 @@ public class JavaFXNPCGen extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
 
             Scene scene = new Scene(root);
-            
+            primaryStage.setTitle("NPCGen");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {
