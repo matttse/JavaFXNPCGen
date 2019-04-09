@@ -7,6 +7,8 @@ package javafxnpcgen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +18,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import service.NPC;
 
@@ -46,32 +49,40 @@ public class DetailsViewController implements Initializable {
         Attacks.setText(npc.getAttacks());
         Name.setText(npc.getName());
         Level.setText(npc.getLevel());
-        TableView tableView = new TableView();
-        tableView.getItems().add(npc);
-//        strengthCol.setText(npc.getStrength());
-//        constitutionCol.setText(npc.getConstitution());
-//        dexterityCol.setText(npc.getDexterity());
-//        intelligenceCol.setText(npc.getIntelligence());
-//        wisdomCol.setText(npc.getWisdom());
-//        charismaCol.setText(npc.getCharisma());
+        tableView.setItems(getAttributes(npc));
+    }
+    /**
+     * This method will return an ObservableList of NPC objects
+     */
+    public ObservableList<NPC>  getAttributes(NPC selectionNPC)
+    {
+        ObservableList<NPC> attributes = FXCollections.observableArrayList();
+        attributes.add(new NPC(selectionNPC.getStrength(), 
+                selectionNPC.getConstitution(),
+                selectionNPC.getDexterity(),
+                selectionNPC.getIntelligence(),
+                selectionNPC.getWisdom(),
+                selectionNPC.getCharisma()
+            )
+        );
+        
+        return attributes;
     }
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //set up the columns in the table
-        strengthCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("STR"));
-        constitutionCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("CON"));
-        dexterityCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("DEX"));
-        intelligenceCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("INT"));
-        wisdomCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("WIS"));
-        charismaCol.setCellValueFactory(new PropertyValueFactory<NPC, String>("CHAR"));
-        
+    public void initialize(URL url, ResourceBundle rb) {      
         
         //Update the table to allow for the first and last name fields
         //to be editable
         tableView.setEditable(true);
+        strengthCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        constitutionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        dexterityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        intelligenceCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        wisdomCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        charismaCol.setCellFactory(TextFieldTableCell.forTableColumn());
         
         //This will allow the table to select multiple rows at once
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

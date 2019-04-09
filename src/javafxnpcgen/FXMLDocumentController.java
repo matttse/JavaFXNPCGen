@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import service.NPC;
 
@@ -47,9 +48,9 @@ public class FXMLDocumentController implements Initializable {
     private void resetButtonAction(ActionEvent event) {
         NumberOfNPCsSelect.setValue(1);
         LevelSelect.setValue(1);
-        ClassSelect.setValue("Humanoid");
+        ClassSelect.setValue("Human");
         AbilityScore.setValue("1");//1, 2–3, 4–5, 6–7, 8–9, 10–11, 12–13, 14–15, 16–17, 18–19, 20–21, 22–23, 24–25, 26–27, 28–29, 30
-        Modifier.setValue(-5);//−5, −4, −3, −2, −1, +0, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10
+        Modifier.setValue(0);//+0, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10
     }
     
     @FXML
@@ -81,7 +82,8 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setData();
-    }    
+    }
+    
     public void getDataFromFields() {
         
         selectedNPC.setLevel(String.valueOf(LevelSelect.getSelectionModel().getSelectedIndex()+2));
@@ -105,7 +107,7 @@ public class FXMLDocumentController implements Initializable {
             selectedNPC.setStrength(String.valueOf(getRandomInt(rand, low, low*high)));
             selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, low, low*high)));
         }
-        System.out.print(selectedNPC.getConstitution());
+        
         if (selectedNPC.getConstitution().equals("16")) {
             int bonus = 1;
             selectedNPC.setHitPoints(
@@ -133,6 +135,7 @@ public class FXMLDocumentController implements Initializable {
                 )
             )
         );
+        
     }
     public static int getRandomInt(Random random, int min, int max)
     {

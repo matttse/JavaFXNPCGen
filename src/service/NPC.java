@@ -35,13 +35,15 @@ public class NPC {
         this.HitPoints = HitPoints;
         this.Speed = Speed;
         this.Attacks = Attacks;
+    }
+
+    public NPC(String strength, String constitution, String constitution0, String constitution1, String constitution2, String constitution3) {
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
         this.intelligence = intelligence;
         this.wisdom = wisdom;
         this.charisma = charisma;
-        
     }
 
     public String getName() {
