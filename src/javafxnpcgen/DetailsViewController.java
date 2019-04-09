@@ -45,29 +45,42 @@ public class DetailsViewController implements Initializable {
     public void initData(NPC npc) {        
         ArmorClass.setText(npc.getArmorClass());
         HitPoints.setText(npc.getHitPoints());
-        Speed.setText(npc.getSpeed());
-        Attacks.setText(npc.getAttacks());
         Name.setText(npc.getName());
         Level.setText(npc.getLevel());
         tableView.setItems(getAttributes(npc));
+//        tableView.setItems(getAttributes());
     }
     /**
      * This method will return an ObservableList of NPC objects
      */
-    public ObservableList<NPC>  getAttributes(NPC selectionNPC)
+    public ObservableList<NPC>  getAttributes(NPC npc)
     {
         ObservableList<NPC> attributes = FXCollections.observableArrayList();
-        attributes.add(new NPC(selectionNPC.getStrength(), 
-                selectionNPC.getConstitution(),
-                selectionNPC.getDexterity(),
-                selectionNPC.getIntelligence(),
-                selectionNPC.getWisdom(),
-                selectionNPC.getCharisma()
+        attributes.add(new NPC(npc.getStrength(), 
+                npc.getConstitution(),
+                npc.getDexterity(),
+                npc.getIntelligence(),
+                npc.getWisdom(),
+                npc.getCharisma()
             )
         );
         
         return attributes;
     }
+//    public ObservableList<NPC>  getAttributes()
+//    {
+//        ObservableList<NPC> attributes = FXCollections.observableArrayList();
+//        attributes.add(new NPC(selectionNPC.getStrength(), 
+//                selectionNPC.getConstitution(),
+//                selectionNPC.getDexterity(),
+//                selectionNPC.getIntelligence(),
+//                selectionNPC.getWisdom(),
+//                selectionNPC.getCharisma()
+//            )
+//        );
+//        
+//        return attributes;
+//    }
     /**
      * Initializes the controller class.
      */
@@ -83,9 +96,7 @@ public class DetailsViewController implements Initializable {
         intelligenceCol.setCellFactory(TextFieldTableCell.forTableColumn());
         wisdomCol.setCellFactory(TextFieldTableCell.forTableColumn());
         charismaCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        
-        //This will allow the table to select multiple rows at once
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+       
         
     } 
     public void changeStrengthCellEvent(CellEditEvent edittedCell)

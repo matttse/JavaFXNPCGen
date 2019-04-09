@@ -40,14 +40,14 @@
       <TextField fx:id="Name" layoutX="93.0" layoutY="64.0" />
       <TextField fx:id="Level" layoutX="301.0" layoutY="64.0" />
       <Button fx:id="exitButton" layoutX="503.0" layoutY="716.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-      <TableView fx:id="tableView" layoutX="28.0" layoutY="361.0" prefHeight="83.0" prefWidth="517.0">
+      <TableView fx:id="tableView" layoutX="28.0" layoutY="361.0" prefHeight="72.0" prefWidth="525.0">
         <columns>
           <TableColumn fx:id="strengthCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="STR" />
           <TableColumn fx:id="constitutionCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="CON" />
             <TableColumn fx:id="dexterityCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="DEX" />
             <TableColumn fx:id="intelligenceCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="INT" />
             <TableColumn fx:id="wisdomCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="WIS" />
-            <TableColumn fx:id="charismaCol" minWidth="87.0" prefWidth="0.0" resizable="false" text="CHA" />
+            <TableColumn fx:id="charismaCol" minWidth="81.0" prefWidth="81.0" resizable="false" text="CHA" />
         </columns>
       </TableView>
    </children>

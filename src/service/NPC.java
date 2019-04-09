@@ -13,31 +13,14 @@ public class NPC {
     private String Name, Level, ArmorClass, HitPoints, Speed, Attacks,
             strength, dexterity, constitution, intelligence, wisdom, charisma;
 
-    public NPC(String Name, String Level, String ArmorClass, String HitPoints, String Speed, String Attacks, String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma) {
-        this.Name = Name;
-        this.Level = Level;
-        this.ArmorClass = ArmorClass;
-        this.HitPoints = HitPoints;
-        this.Speed = Speed;
-        this.Attacks = Attacks;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.constitution = constitution;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.charisma = charisma;
-    }
-
     public NPC() {
         this.Name = Name;
         this.Level = Level;
         this.ArmorClass = ArmorClass;
         this.HitPoints = HitPoints;
-        this.Speed = Speed;
-        this.Attacks = Attacks;
     }
 
-    public NPC(String strength, String constitution, String constitution0, String constitution1, String constitution2, String constitution3) {
+    public NPC(String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma) {
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
