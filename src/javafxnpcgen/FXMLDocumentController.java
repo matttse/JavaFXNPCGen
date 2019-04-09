@@ -98,36 +98,41 @@ public class FXMLDocumentController implements Initializable {
             selectedNPC.setStrength(String.valueOf(getRandomInt(rand, 1, 18)));
             selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, 1, 18)));
         } else {
-            int high = AbilityScore.getSelectionModel().getSelectedIndex()+2;
-            int low = AbilityScore.getSelectionModel().getSelectedIndex();
-            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, low, low*high)));
-            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, low, low*high)));
-            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, low, low*high)));
-            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, low, low*high)));
-            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, low, low*high)));
-            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, low, low*high)));
+            int high = 18;
+            int low = Modifier.getSelectionModel().getSelectedItem()+1;
+            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, low, high)));
         }
         
-        if (selectedNPC.getConstitution().equals("16")) {
-            int bonus = 1;
-            selectedNPC.setHitPoints(
-                String.valueOf(
-                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
-                )
-            );
-        } else if (selectedNPC.getConstitution().equals("17")) {
-            int bonus = 2;
-            selectedNPC.setHitPoints(
-                String.valueOf(
-                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
-                )
-            );
-        } else {
-            selectedNPC.setHitPoints(
-                String.valueOf(
-                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10))
-                )
-            );
+        switch (selectedNPC.getConstitution()) {
+            case "16":
+                {
+                    int bonus = 1;
+                    selectedNPC.setHitPoints(
+                            String.valueOf(
+                                    (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                            )
+                    );      break;
+                }
+            case "17":
+                {
+                    int bonus = 2;
+                    selectedNPC.setHitPoints(
+                            String.valueOf(
+                                    (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                            )
+                    );      break;
+                }
+            default:
+                selectedNPC.setHitPoints(
+                        String.valueOf(
+                                (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10))
+                        )
+                );  break;
         }
         selectedNPC.setArmorClass("+".concat(
                 Integer.toString(

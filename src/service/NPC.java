@@ -10,10 +10,24 @@ package service;
  * @author tsemd
  */
 public class NPC {
-    private String Name, Level, ArmorClass, HitPoints, Speed, Attacks,
-            strength, dexterity, constitution, intelligence, wisdom, charisma;
 
-    public NPC() {
+    private String Name, Level, ArmorClass, HitPoints,
+            strength, dexterity, constitution, intelligence, wisdom, charisma;
+    
+    public NPC(String Name, String Level, String ArmorClass, String HitPoints, String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma) {
+        this.Name = Name;
+        this.Level = Level;
+        this.ArmorClass = ArmorClass;
+        this.HitPoints = HitPoints;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.constitution = constitution;
+        this.intelligence = intelligence;
+        this.wisdom = wisdom;
+        this.charisma = charisma;
+    }
+    
+    public NPC(String Name, String Level, String ArmorClass, String HitPoints) {
         this.Name = Name;
         this.Level = Level;
         this.ArmorClass = ArmorClass;
@@ -21,6 +35,19 @@ public class NPC {
     }
 
     public NPC(String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma) {
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.constitution = constitution;
+        this.intelligence = intelligence;
+        this.wisdom = wisdom;
+        this.charisma = charisma;
+    }
+
+    public NPC() {
+        this.Name = Name;
+        this.Level = Level;
+        this.ArmorClass = ArmorClass;
+        this.HitPoints = HitPoints;
         this.strength = strength;
         this.dexterity = dexterity;
         this.constitution = constitution;
@@ -59,22 +86,6 @@ public class NPC {
 
     public void setHitPoints(String HitPoints) {
         this.HitPoints = HitPoints;
-    }
-
-    public String getSpeed() {
-        return Speed;
-    }
-
-    public void setSpeed(String Speed) {
-        this.Speed = Speed;
-    }
-
-    public String getAttacks() {
-        return Attacks;
-    }
-
-    public void setAttacks(String Attacks) {
-        this.Attacks = Attacks;
     }
 
     public String getStrength() {

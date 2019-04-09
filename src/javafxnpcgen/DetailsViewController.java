@@ -29,13 +29,13 @@ import service.NPC;
  */
 public class DetailsViewController implements Initializable {
     private NPC selectionNPC;
-    @FXML private TableView<NPC> tableView;
-    @FXML private TableColumn<NPC, String> strengthCol;
-    @FXML private TableColumn<NPC, String> constitutionCol;
-    @FXML private TableColumn<NPC, String> dexterityCol;
-    @FXML private TableColumn<NPC, String> intelligenceCol;
-    @FXML private TableColumn<NPC, String> wisdomCol;
-    @FXML private TableColumn<NPC, String> charismaCol;
+    
+    @FXML private TextField strengthTextField;
+    @FXML private TextField constitutionTextField;
+    @FXML private TextField dexterityTextField;
+    @FXML private TextField intelligenceTextField;
+    @FXML private TextField wisdomTextField;
+    @FXML private TextField charismaTextField;
     @FXML private TextField ArmorClass;
     @FXML private TextField HitPoints;
     @FXML private TextField Speed;
@@ -47,89 +47,22 @@ public class DetailsViewController implements Initializable {
         HitPoints.setText(npc.getHitPoints());
         Name.setText(npc.getName());
         Level.setText(npc.getLevel());
-        tableView.setItems(getAttributes(npc));
-//        tableView.setItems(getAttributes());
+        strengthTextField.setText(npc.getStrength());
+        constitutionTextField.setText(npc.getConstitution());
+        dexterityTextField.setText(npc.getDexterity());
+        intelligenceTextField.setText(npc.getIntelligence());
+        wisdomTextField.setText(npc.getWisdom());
+        charismaTextField.setText(npc.getCharisma());
     }
-    /**
-     * This method will return an ObservableList of NPC objects
-     */
-    public ObservableList<NPC>  getAttributes(NPC npc)
-    {
-        ObservableList<NPC> attributes = FXCollections.observableArrayList();
-        attributes.add(new NPC(npc.getStrength(), 
-                npc.getConstitution(),
-                npc.getDexterity(),
-                npc.getIntelligence(),
-                npc.getWisdom(),
-                npc.getCharisma()
-            )
-        );
-        
-        return attributes;
-    }
-//    public ObservableList<NPC>  getAttributes()
-//    {
-//        ObservableList<NPC> attributes = FXCollections.observableArrayList();
-//        attributes.add(new NPC(selectionNPC.getStrength(), 
-//                selectionNPC.getConstitution(),
-//                selectionNPC.getDexterity(),
-//                selectionNPC.getIntelligence(),
-//                selectionNPC.getWisdom(),
-//                selectionNPC.getCharisma()
-//            )
-//        );
-//        
-//        return attributes;
-//    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-        
-        //Update the table to allow for the first and last name fields
-        //to be editable
-        tableView.setEditable(true);
-        strengthCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        constitutionCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        dexterityCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        intelligenceCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        wisdomCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        charismaCol.setCellFactory(TextFieldTableCell.forTableColumn());
-       
+              
         
     } 
-    public void changeStrengthCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setStrength(edittedCell.getNewValue().toString());
-    }
-    public void changeConstitutionCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setConstitution(edittedCell.getNewValue().toString());
-    }
-    public void changeDexterityCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setDexterity(edittedCell.getNewValue().toString());
-    }
-    public void changeWisdomCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setWisdom(edittedCell.getNewValue().toString());
-    }
-    public void changeIntelligenceCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setIntelligence(edittedCell.getNewValue().toString());
-    }
-    public void changeCharismaCellEvent(CellEditEvent edittedCell)
-    {
-        NPC selectedNPC =  tableView.getSelectionModel().getSelectedItem();
-        selectedNPC.setCharisma(edittedCell.getNewValue().toString());
-    }
-    
     @FXML
     private void exit(ActionEvent event) {
         System.exit(0);
