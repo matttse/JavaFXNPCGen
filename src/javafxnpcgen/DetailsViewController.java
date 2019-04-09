@@ -27,7 +27,7 @@ public class DetailsViewController implements Initializable {
     int quant;
     double price;
     String item;
-    String list_name_data;
+    String listNameData;
     private NPC selectionNPC;    
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
@@ -40,12 +40,19 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField Name;
     @FXML private TextField Level;
     
+    ArrayList<ListItem> itemList = new ArrayList<ListItem>();
+
+    DatabaseController db; //create new DatabaseController object
+
+    public DetailsViewController() {
+        db = new DatabaseController(); //initialize new DatabaseController object
+
+    }
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {      
-        
+    public void initialize(URL url, ResourceBundle rb) {            
             //open the database connection
             db.openConnection();
         
@@ -68,12 +75,4 @@ public class DetailsViewController implements Initializable {
         charismaTextField.setText(npc.getCharisma());
     }
     
-    ArrayList<ListItem> itemList = new ArrayList<ListItem>();
-
-    DatabaseController db; //create new DatabaseController object
-
-    public DetailsViewController() {
-        db = new DatabaseController(); //initialize new DatabaseController object
-
-    }
 }

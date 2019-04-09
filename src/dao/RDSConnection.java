@@ -20,7 +20,9 @@ public class RDSConnection {
             try {
                     Class.forName("com.mysql.jdbc.Driver");
 
-                    con = DriverManager.getConnection("jdbc:mysql://[rds-endpoint]/[database_name]?user=[user]&password=[password]");
+//                    con = DriverManager.getConnection("jdbc:mysql://[rds-endpoint]/[database_name]?user=[user]&password=[password]");
+                    con = DriverManager.getConnection("jdbc:mysql://npcgen.cjkwv9ccpled.us-east-1.rds.amazonaws.com:3306/items?user=admin&password=grEj4KLtsK26E4re");
+                    
 
                     return con;
             }
