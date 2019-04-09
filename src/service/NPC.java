@@ -28,6 +28,22 @@ public class NPC {
         this.charisma = charisma;
     }
 
+    public NPC() {
+        this.Name = Name;
+        this.Level = Level;
+        this.ArmorClass = ArmorClass;
+        this.HitPoints = HitPoints;
+        this.Speed = Speed;
+        this.Attacks = Attacks;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.constitution = constitution;
+        this.intelligence = intelligence;
+        this.wisdom = wisdom;
+        this.charisma = charisma;
+        
+    }
+
     public String getName() {
         return Name;
     }

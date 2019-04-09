@@ -6,6 +6,7 @@
 package javafxnpcgen;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,14 +21,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import service.LocalItemList;
+import service.NPC;
 
 /**
  *
  * @author tsemd
  */
 public class FXMLDocumentController implements Initializable {
-    
+    NPC selectedNPC = new NPC();
     @FXML
     private Label label;
         
@@ -58,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void GenerateNPCButton(ActionEvent event) {
+        getDataFromFields();
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("DetailsView.fxml"));
@@ -70,6 +72,7 @@ public class FXMLDocumentController implements Initializable {
             // access the controller and call a method
             DetailsViewController controller = loader.getController();
             
+            controller.initData(selectedNPC);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -79,21 +82,73 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setData();
     }    
-    
-    public void setData(){
-        // initialize clear
-        LevelSelect.getItems().clear();
-        ClassSelect.getItems().clear();
-        AbilityScore.getItems().clear();
-        Modifier.getItems().clear();
+    public void getDataFromFields() {
         
+        selectedNPC.setLevel(String.valueOf(LevelSelect.getSelectionModel().getSelectedIndex()+2));
+        
+        selectedNPC.setName("Enter Name");
+        Random rand = new Random();
+        if (AbilityScore.getSelectionModel().getSelectedIndex() == -1) {
+            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, 1, 18)));
+        } else {
+            int high = AbilityScore.getSelectionModel().getSelectedIndex()+2;
+            int low = AbilityScore.getSelectionModel().getSelectedIndex();
+            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, low, low*high)));
+            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, low, low*high)));
+            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, low, low*high)));
+            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, low, low*high)));
+            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, low, low*high)));
+            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, low, low*high)));
+        }
+        System.out.print(selectedNPC.getConstitution());
+        if (selectedNPC.getConstitution().equals("16")) {
+            int bonus = 1;
+            selectedNPC.setHitPoints(
+                String.valueOf(
+                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                )
+            );
+        } else if (selectedNPC.getConstitution().equals("17")) {
+            int bonus = 2;
+            selectedNPC.setHitPoints(
+                String.valueOf(
+                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                )
+            );
+        } else {
+            selectedNPC.setHitPoints(
+                String.valueOf(
+                        (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10))
+                )
+            );
+        }
+        selectedNPC.setArmorClass("+".concat(
+                Integer.toString(
+                        getRandomInt(rand, 2, 10) + Modifier.getSelectionModel().getSelectedItem()
+                )
+            )
+        );
+    }
+    public static int getRandomInt(Random random, int min, int max)
+    {
+      return random.nextInt(max - min + 1) + min;
+    }
+    public void setData(){
+        NumberOfNPCsSelect.getItems().addAll(
+                1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+        );
         // add items
         AbilityScore.getItems().addAll(
                 "1","2-3","4-5","6-7","8-9","10-11","12-13","14-15","16-17","18-19"
                 ,"20-21","22-23","24-25","26-27","28-29","30"
         );
         Modifier.getItems().addAll(
-                -5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10
+                0,1,2,3,4,5,6,7,8,9,10
         );
         LevelSelect.getItems().addAll(
                 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
