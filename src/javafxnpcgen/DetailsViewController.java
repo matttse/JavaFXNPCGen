@@ -12,10 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import service.NPC;
-import service.ListItem;
+import model.NPC;
+import model.ItemDetails;
 import dao.DatabaseController;
 import javafx.scene.control.TextArea;
+import model.Equipment;
 
 /**
  * FXML Controller class
@@ -30,6 +31,7 @@ public class DetailsViewController implements Initializable {
     String item;
     String listNameData;
     private NPC selectionNPC;    
+    private Equipment equipmentList;
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
@@ -42,7 +44,7 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField Level;
     @FXML private TextArea Notes;
     
-    ArrayList<ListItem> itemList = new ArrayList<ListItem>();
+    ArrayList<ItemDetails> itemList = new ArrayList<ItemDetails>();
 
     DatabaseController db; //create new DatabaseController object
 

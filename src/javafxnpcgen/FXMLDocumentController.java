@@ -6,33 +6,34 @@
 package javafxnpcgen;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import service.NPC;
-import service.RandomNameGen;
-import service.FileReading;
+import model.NPC;
+import model.RandomNameGen;
+import model.FileReading;
+import model.Monster;
 
 /**
  *
  * @author tsemd
  */
 public class FXMLDocumentController implements Initializable {
-    NPC selectedNPC = new NPC();
+    Monster selectedNPC = new Monster();
+    FileReading readFile = new FileReading();
     private final String CSV_MONSTER_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\monster_name.csv";
+    private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
+    private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
+    private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
     @FXML
     private Label label;
         
@@ -89,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void getDataFromFields() {
-        FileReading csvReader = new FileReading();
+        
         selectedNPC.setLevel(String.valueOf(LevelSelect.getSelectionModel().getSelectedIndex()+2));
         
         Random rand = new Random();
@@ -147,7 +148,13 @@ public class FXMLDocumentController implements Initializable {
         selectedNPC.setName(name.generateName());
         
     
-        csvReader.readAllDataAtOnce(CSV_MONSTER_FILE_PATH);
+        readFile.readScanner(CSV_MONSTER_FILE_PATH);
+        
+//        Monster monsterType = new Monster();
+//        monsterType.setClassName("");
+
+        
+        
     }
     public static int getRandomInt(Random random, int min, int max)
     {

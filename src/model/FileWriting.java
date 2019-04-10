@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package model;
 //Importing the packages for writing to a file and throwing an exception if it can't open a file
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package model;
 
 /**
  *
  * @author tsemd
  */
-public class NPC {
+public abstract class NPC {
 
     private String Name, Level, ArmorClass, HitPoints,
             strength, dexterity, constitution, intelligence, wisdom, charisma, notes;

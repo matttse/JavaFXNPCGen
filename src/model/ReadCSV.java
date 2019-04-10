@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package model;
 
 import com.opencsv.*;
 import java.io.FileReader;
@@ -18,13 +18,6 @@ public interface ReadCSV {
     
     // Java code to illustrate reading a 
     // all data at once 
-    public void readAllDataAtOnce(String file);
-    
-    // Java code to illustrate 
-    // Reading CSV File with different separator 
-    public void readDataFromCustomSeperator(String file);
-    // Java code to illustrate reading a 
-    // CSV file line by line 
-    public void readDataLineByLine(String file);
+    public void readScanner(String file);
 
 }
