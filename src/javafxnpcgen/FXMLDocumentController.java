@@ -23,6 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import service.NPC;
+import service.RandomNameGen;
+import service.FileReading;
 
 /**
  *
@@ -30,6 +32,7 @@ import service.NPC;
  */
 public class FXMLDocumentController implements Initializable {
     NPC selectedNPC = new NPC();
+    private final String CSV_MONSTER_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\monster_name.csv";
     @FXML
     private Label label;
         
@@ -86,10 +89,9 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void getDataFromFields() {
-        
+        FileReading csvReader = new FileReading();
         selectedNPC.setLevel(String.valueOf(LevelSelect.getSelectionModel().getSelectedIndex()+2));
         
-        selectedNPC.setName("Enter Name");
         Random rand = new Random();
         if (AbilityScore.getSelectionModel().getSelectedIndex() == -1) {
             selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, 1, 18)));
@@ -141,7 +143,11 @@ public class FXMLDocumentController implements Initializable {
                 )
             )
         );
+        RandomNameGen name = new RandomNameGen();
+        selectedNPC.setName(name.generateName());
         
+    
+        csvReader.readAllDataAtOnce(CSV_MONSTER_FILE_PATH);
     }
     public static int getRandomInt(Random random, int min, int max)
     {
@@ -311,4 +317,5 @@ public class FXMLDocumentController implements Initializable {
         
 
     }
+    
 }

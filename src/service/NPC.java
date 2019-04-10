@@ -12,9 +12,9 @@ package service;
 public class NPC {
 
     private String Name, Level, ArmorClass, HitPoints,
-            strength, dexterity, constitution, intelligence, wisdom, charisma;
-    
-    public NPC(String Name, String Level, String ArmorClass, String HitPoints, String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma) {
+            strength, dexterity, constitution, intelligence, wisdom, charisma, notes;
+
+    public NPC(String Name, String Level, String ArmorClass, String HitPoints, String strength, String dexterity, String constitution, String intelligence, String wisdom, String charisma, String notes) {
         this.Name = Name;
         this.Level = Level;
         this.ArmorClass = ArmorClass;
@@ -25,8 +25,8 @@ public class NPC {
         this.intelligence = intelligence;
         this.wisdom = wisdom;
         this.charisma = charisma;
+        this.notes = notes;
     }
-    
     public NPC(String Name, String Level, String ArmorClass, String HitPoints) {
         this.Name = Name;
         this.Level = Level;
@@ -135,6 +135,15 @@ public class NPC {
     public void setCharisma(String charisma) {
         this.charisma = charisma;
     }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+    
     
     
 }

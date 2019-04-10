@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import service.NPC;
 import service.ListItem;
 import dao.DatabaseController;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -39,6 +40,7 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField HitPoints;
     @FXML private TextField Name;
     @FXML private TextField Level;
+    @FXML private TextArea Notes;
     
     ArrayList<ListItem> itemList = new ArrayList<ListItem>();
 
@@ -73,6 +75,7 @@ public class DetailsViewController implements Initializable {
         intelligenceTextField.setText(npc.getIntelligence());
         wisdomTextField.setText(npc.getWisdom());
         charismaTextField.setText(npc.getCharisma());
+        Notes.setText(npc.getNotes());
     }
     
 }
