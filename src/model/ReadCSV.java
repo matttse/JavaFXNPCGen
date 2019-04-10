@@ -5,10 +5,6 @@
  */
 package model;
 
-import com.opencsv.*;
-import java.io.FileReader;
-import java.util.List;
-
 /**
  *
  * @author tsemd
