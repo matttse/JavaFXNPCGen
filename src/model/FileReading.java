@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package model;
-import com.opencsv.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,39 +15,35 @@ import java.util.Scanner;
  * @author tsemd
  */
 public class FileReading implements ReadCSV {
-    public void readScanner(String filePath) {
-        String fileName= filePath;
-        File file = new File(fileName);
+    protected List<String[]> returnList = new ArrayList<>();
+    
+    public FileReading() {
+        this.returnList = returnList;
+    }
+    public FileReading(ArrayList returnList) {
+        this.returnList = returnList;
+    }
 
-        // this gives you a 2-dimensional array of strings
-        List<List<String>> lines = new ArrayList<>();
-        Scanner inputStream;
+    public List<String[]> getReturnList() {
+        return returnList;
+    }
 
-        try{
-            inputStream = new Scanner(file);
+    public void setReturnList(List<String[]> returnList) {
+        this.returnList = returnList;
+    }
 
-            while(inputStream.hasNext()){
-                String line= inputStream.next();
-                String[] values = line.split(",");
-                // this adds the currently parsed line to the 2-dimensional string array
-                lines.add(Arrays.asList(values));
+    public List<String[]> readScanner(String filename) throws IOException { 
+        int count = 0;
+        List<String[]> content = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                content.add(line.split(","));
             }
-            
-            inputStream.close();
-            
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+        //Some error logging
         }
-        
-        // the following code lets you iterate through the 2-dimensional array
-        int lineNo = 1;
-        for(List<String> line: lines) {
-            int columnNo = 1;
-            for (String value: line) {
-                System.out.println("Line " + lineNo + " Column " + columnNo + ": " + value);
-                columnNo++;
-            }
-            lineNo++;
-        }
-    }    
+        return content;
+    } 
+
 }

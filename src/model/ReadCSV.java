@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  *
  * @author tsemd
@@ -14,6 +17,6 @@ public interface ReadCSV {
     
     // Java code to illustrate reading a 
     // all data at once 
-    public void readScanner(String file);
+    public List<String[]> readScanner(String file) throws IOException;
 
 }

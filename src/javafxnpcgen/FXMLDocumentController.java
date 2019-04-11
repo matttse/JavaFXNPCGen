@@ -5,10 +5,14 @@
  */
 package javafxnpcgen;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +33,7 @@ import model.Monster;
  */
 public class FXMLDocumentController implements Initializable {
     Monster selectedNPC = new Monster();
-    FileReading readFile = new FileReading();
+    
     private final String CSV_MONSTER_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\monster_name.csv";
     private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
     private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
@@ -146,13 +150,7 @@ public class FXMLDocumentController implements Initializable {
         );
         RandomNameGen name = new RandomNameGen();
         selectedNPC.setName(name.generateName());
-        
-    
-        readFile.readScanner(CSV_MONSTER_FILE_PATH);
-        
-//        Monster monsterType = new Monster();
-//        monsterType.setClassName("");
-
+        Monster monsterType = new Monster();        
         
         
     }
@@ -161,6 +159,23 @@ public class FXMLDocumentController implements Initializable {
       return random.nextInt(max - min + 1) + min;
     }
     public void setData(){
+        FileReading readLocalFiles = new FileReading();
+        try {
+            List<String[]> monsterList = readLocalFiles.readScanner(CSV_MONSTER_FILE_PATH);
+            for (int i = 0; i < 1; i++) {
+                String[] get = monsterList.get(i);
+                for (int j = 0; j < get.length; j++) {
+                    String string = get[j];
+                    System.out.println(string);
+                    ClassSelect.getItems().add(string);
+                }
+                
+            }
+            
+            System.out.println(monsterList);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         NumberOfNPCsSelect.getItems().addAll(
                 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
         );
@@ -174,152 +189,6 @@ public class FXMLDocumentController implements Initializable {
         );
         LevelSelect.getItems().addAll(
                 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
-        );
-        ClassSelect.getItems().addAll(
-                "Aberration"
-                ,"Armor"
-                ,"Construct"
-                ,"Dragon"
-                ,"Elemental"
-                ,"Fey (Elf)"
-                ,"Fiend"
-                ,"Fiend "
-                ,"Fiend (Demon)"
-                ,"Fiend (Demon, Shapechanger)"
-                ,"Fiend (Devil)"
-                ,"Fiend (Shapechanger)"
-                ,"Fiend (Yugoloth)"
-                ,"Giant"
-                ,"Humanoid"
-                ,"Humanoid (Any Race)"
-                ,"Humanoid (Derro)"
-                ,"Humanoid (Dwarf)"
-                ,"Humanoid (Elf)"
-                ,"Humanoid (Gith)"
-                ,"Humanoid (Meazel)"
-                ,"Humanoid (Nagpa)"
-                ,"Humanoid (Tortle)"
-                ,"Humanoid (gnome)"
-                ,"Language"
-                ,"Monstrosity"
-                ,"Ooze"
-                ,"Plant"
-                ,"Skill"
-                ,"Titan"
-                ,"Tool"
-                ,"Undead"
-                ,"Weapon"
-                ,"aberration"
-                ,"aberration (fey)"
-                ,"aberration (shapechanger)"
-                ,"aberration (shoth)"
-                ,"beast"
-                ,"beast, humanoid, giant, or monstrosity"
-                ,"celestial"
-                ,"celestial (dakini)"
-                ,"celestial (shapechanger)"
-                ,"celestial (titan)"
-                ,"construct"
-                ,"construct (devil)"
-                ,"dragon"
-                ,"dragon (shapechanger)"
-                ,"elemental"
-                ,"elemental (shapechanger)"
-                ,"fey"
-                ,"fey (shapechanger)"
-                ,"fiend"
-                ,"fiend (demon)"
-                ,"fiend (demon, orc)"
-                ,"fiend (demon, shapechanger)"
-                ,"fiend (devil)"
-                ,"fiend (gnoll)"
-                ,"fiend (shapechanger)"
-                ,"fiend (yugoloth)"
-                ,"giant"
-                ,"giant (cloud giant)"
-                ,"giant (fire giant)"
-                ,"giant (frost giant)"
-                ,"giant (hill giant)"
-                ,"giant (shapechanger, titan)"
-                ,"giant (stone giant)"
-                ,"giant (storm giant)"
-                ,"humanoid"
-                ,"humanoid "
-                ,"humanoid (Simic hybrid)"
-                ,"humanoid (aarakocra)"
-                ,"humanoid (any race)"
-                ,"humanoid (bearfolk)"
-                ,"humanoid (bullywug)"
-                ,"humanoid (burrowling)"
-                ,"humanoid (dark folk)"
-                ,"humanoid (derro)"
-                ,"humanoid (dhampir)"
-                ,"humanoid (dragonborn)"
-                ,"humanoid (dwarf)"
-                ,"humanoid (elf)"
-                ,"humanoid (erina)"
-                ,"humanoid (firenewt)"
-                ,"humanoid (gearforged)"
-                ,"humanoid (giant)"
-                ,"humanoid (gith)"
-                ,"humanoid (gnoll)"
-                ,"humanoid (gnoll, shapechanger)"
-                ,"humanoid (gnome)"
-                ,"humanoid (goblinoid)"
-                ,"humanoid (grimlock)"
-                ,"humanoid (grung)"
-                ,"humanoid (half-elf)"
-                ,"humanoid (human)"
-                ,"humanoid (human, shapechanger)"
-                ,"humanoid (kenku)"
-                ,"humanoid (kobold)"
-                ,"humanoid (kraul)"
-                ,"humanoid (kryt)"
-                ,"humanoid (kuo-toa)"
-                ,"humanoid (lemurfolk)"
-                ,"humanoid (lizardfolk)"
-                ,"humanoid (merfolk)"
-                ,"humanoid (noctiny)"
-                ,"humanoid (orc)"
-                ,"humanoid (quaggoth)"
-                ,"humanoid (ramag)"
-                ,"humanoid (ratfolk)"
-                ,"humanoid (roachling)"
-                ,"humanoid (roackling)"
-                ,"humanoid (sahuagin)"
-                ,"humanoid (shadow fey)"
-                ,"humanoid (shapechanger)"
-                ,"humanoid (shapechanger, nkosi)"
-                ,"humanoid (simian)"
-                ,"humanoid (thri-kreen)"
-                ,"humanoid (tiefling)"
-                ,"humanoid (tosculi)"
-                ,"humanoid (troglodyte)"
-                ,"humanoid (trollkin)"
-                ,"humanoid (xvart)"
-                ,"humanoid (yakirian)"
-                ,"humanoid (yuan-ti)"
-                ,"monstrosity"
-                ,"monstrosity (shapechanger)"
-                ,"monstrosity (shapechanger, yuan-ti)"
-                ,"monstrosity (titan)"
-                ,"ooze"
-                ,"plant"
-                ,"plant (shapechanger)"
-                ,"swarm"
-                ,"swarm of Medium humanoids"
-                ,"swarm of Tiny beasts"
-                ,"swarm of Tiny constructs"
-                ,"swarm of medium undead"
-                ,"swarm of tiny aberrations"
-                ,"swarm of tiny beasts"
-                ,"swarm of tiny constructs"
-                ,"swarm of tiny elementals"
-                ,"swarm of tiny fey"
-                ,"swarm of tiny monstrosities"
-                ,"undead"
-                ,"undead (shapechanger)"
-                ,"undead (shapeshifter)"
         );
         
 
