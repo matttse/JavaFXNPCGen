@@ -78,6 +78,14 @@ public class DetailsViewController implements Initializable {
         wisdomTextField.setText(npc.getWisdom());
         charismaTextField.setText(npc.getCharisma());
         Notes.setText(npc.getNotes());
+        
     }
+    
+    public void setEquipmentList(Equipment itemList) {
+        equipmentList.setItemList(itemList.getItemList());
+    }
+    
+    
+    
     
 }

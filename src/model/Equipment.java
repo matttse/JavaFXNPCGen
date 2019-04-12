@@ -5,15 +5,22 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author tsemd
  */
 public abstract class Equipment {
     private String name;
+    private ArrayList<String> itemList;
 
     public Equipment(String name) {
         this.name = name;
+    }
+
+    public Equipment(ArrayList<String> itemList) {
+        this.itemList = itemList;
     }
 
     public String getName() {
@@ -22,6 +29,14 @@ public abstract class Equipment {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<String> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(ArrayList<String> itemList) {
+        this.itemList = itemList;
     }
     
 }
