@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -40,6 +41,8 @@ public class FXMLDocumentController implements Initializable {
     private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
     private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
     private List<String[]> itemList;
+    private Map selectedItems;
+    protected ArrayList<String> items = new ArrayList();
     @FXML
     private Label label;
         
@@ -153,7 +156,10 @@ public class FXMLDocumentController implements Initializable {
         );
         RandomNameGen name = new RandomNameGen();
         selectedNPC.setName(name.generateName());
-        Monster monsterType = new Monster();   
+        
+//        items.add("first value");
+//        equipmentList.setItemList(items);
+        Monster monsterType = new Monster();  
     }
     public static int getRandomInt(Random random, int min, int max)
     {
@@ -180,15 +186,18 @@ public class FXMLDocumentController implements Initializable {
             itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
             for (int i = 0; i < 1; i++) {
                 String[] get = itemList.get(i);
+                
                 for (int j = 0; j < get.length; j++) {
-                    String equipment_name = get[j];
-                    System.out.println(equipment_name);
+                    items.add(j, get[j]);
+//                    String equipment_name = get[j];
+//                    selectedItems.put(j, get[j]);
+                    System.out.println(items.get(j));
                     
                 }
                 
             }
             
-            System.out.println(itemList);
+
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
