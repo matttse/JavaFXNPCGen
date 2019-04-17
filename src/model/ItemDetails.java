@@ -12,10 +12,11 @@ import javafx.beans.property.SimpleStringProperty;
  * @author tsemd
  */
 public class ItemDetails extends Equipment {
-    private SimpleStringProperty name, value, experience;
+    private SimpleStringProperty name, description, value, experience;
 
-    public ItemDetails(String name, String value, String experience) {
+    public ItemDetails(String name, String description, String value, String experience) {
         this.name = new SimpleStringProperty(name);
+        this.description = new SimpleStringProperty(value);
         this.value = new SimpleStringProperty(value);
         this.experience = new SimpleStringProperty(experience);
     }
@@ -43,4 +44,15 @@ public class ItemDetails extends Equipment {
     public void setExperience(SimpleStringProperty experience) {
         this.experience = experience;
     }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public void setDescription(SimpleStringProperty description) {
+        this.description = description;
+    }
+    
+    
+    
 }

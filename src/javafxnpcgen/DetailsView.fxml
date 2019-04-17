@@ -117,9 +117,10 @@
       </GridPane>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <columns>
-          <TableColumn fx:id="itemName" prefWidth="237.0" text="Item Name" />
-            <TableColumn fx:id="value" prefWidth="128.0" text="Value" />
-            <TableColumn fx:id="experience" prefWidth="115.0" text="XP" />
+          <TableColumn fx:id="itemNameCol" prefWidth="327.0" text="Item Name" />
+            <TableColumn fx:id="itemDescriptionCol" prefWidth="260.0" text="Description" />
+            <TableColumn fx:id="experienceCol" prefWidth="146.0" text="XP" />
+            <TableColumn fx:id="valueCol" prefWidth="93.0" text="Value" />
         </columns>
       </TableView>
    </children>

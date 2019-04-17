@@ -15,7 +15,10 @@ import model.NPC;
 import model.ItemDetails;
 import dao.DatabaseController;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import static javafxnpcgen.FXMLDocumentController.getRandomInt;
 import model.FileReading;
 
 /**
@@ -33,11 +37,7 @@ import model.FileReading;
  */
 public class DetailsViewController implements Initializable {
     
-    int pri;
-    int quant;
-    double price;
-    String item;
-    String listNameData;
+
     private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
@@ -52,6 +52,7 @@ public class DetailsViewController implements Initializable {
     @FXML private TextArea Notes;
     @FXML private TableView<ItemDetails> tableView;
     @FXML private TableColumn<ItemDetails, String> itemNameCol;
+    @FXML private TableColumn<ItemDetails, String> itemDescriptionCol;
     @FXML private TableColumn<ItemDetails, String> valueCol;
     @FXML private TableColumn<ItemDetails, String> experienceCol;
     private List<String[]> itemList;
@@ -90,7 +91,8 @@ public class DetailsViewController implements Initializable {
         charismaTextField.setText(npc.getCharisma());
         Notes.setText(npc.getNotes());
         
-        itemNameCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("itemName"));
+        itemNameCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("name"));
+        itemDescriptionCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("description"));
         valueCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("value"));
         experienceCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("experience"));
             
@@ -104,31 +106,32 @@ public class DetailsViewController implements Initializable {
     public ObservableList<ItemDetails> getItems() {
         
         FileReading readLocalFiles = new FileReading();
-        
+        Random rand = new Random();
         try {
             itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
+            System.out.print(itemList.size());
         } catch (IOException ex) {
             Logger.getLogger(DetailsViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-            for (int i = 0; i < 1; i++) {
-                String[] get = itemList.get(i);
-                
-                for (int j = 0; j < get.length; j++) {
-                    items.add(new ItemDetails(get[j],"",""));
-//                    String equipment_name = get[j];
-//                    selectedItems.put(j, get[j]);
-                    System.out.println(items.get(j));
-                    
-                }
-                
+        for (int i = 0; i < 1; i++) {
+            String[] get = itemList.get(i);
+            Collections.shuffle(Arrays.asList(get));
+            int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.ceil(Double.valueOf(get.length/20)));
+            for (int j = 1; j < randomNumberOfItems; j++) {
+                String name = get[j];
+                items.add(new ItemDetails(
+                        name,
+                        "test",
+                        String.valueOf(getRandomInt(rand, 1000, 10000)),
+                        String.valueOf(getRandomInt(rand, 1000, 10000))
+                ));                    
+
             }
+
+        }
             
         return items;
-    }
-    
-    
-    
-    
-    
+    }   
     
 }
+

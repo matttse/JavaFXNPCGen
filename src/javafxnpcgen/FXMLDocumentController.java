@@ -90,7 +90,6 @@ public class FXMLDocumentController implements Initializable {
             DetailsViewController controller = loader.getController();
             
             controller.initData(selectedNPC);
-//            controller.setEquipmentList(equipmentList);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -158,10 +157,7 @@ public class FXMLDocumentController implements Initializable {
         );
         RandomNameGen name = new RandomNameGen();
         selectedNPC.setName(name.generateName());
-        
-//        items.add("first value");
-//        equipmentList.setItemList(items);
-        Monster monsterType = new Monster();  
+        selectedNPC.setNotes(ClassSelect.getValue());
     }
     public static int getRandomInt(Random random, int min, int max)
     {
@@ -180,7 +176,6 @@ public class FXMLDocumentController implements Initializable {
                 
             }
             
-            System.out.println(monsterList);
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
