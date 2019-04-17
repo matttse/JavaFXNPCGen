@@ -38,7 +38,9 @@ import model.FileReading;
 public class DetailsViewController implements Initializable {
     
 
+    private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
     private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
+    private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
@@ -109,6 +111,8 @@ public class DetailsViewController implements Initializable {
         Random rand = new Random();
         try {
             itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
+            itemList.addAll(readLocalFiles.readScanner(CSV_MAGIC_ITEM_FILE_PATH));
+            itemList.addAll(readLocalFiles.readScanner(CSV_SPELL_FILE_PATH));
             System.out.print(itemList.size());
         } catch (IOException ex) {
             Logger.getLogger(DetailsViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -121,7 +125,7 @@ public class DetailsViewController implements Initializable {
                 String name = get[j];
                 items.add(new ItemDetails(
                         name,
-                        "test",
+                        "",
                         String.valueOf(getRandomInt(rand, 1000, 10000)),
                         String.valueOf(getRandomInt(rand, 1000, 10000))
                 ));                    

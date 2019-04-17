@@ -44,9 +44,7 @@ public class FXMLDocumentController implements Initializable {
     Monster selectedNPC = new Monster();
     private Equipment equipmentList;
     private final String CSV_MONSTER_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\monster_name.csv";
-    private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
-    private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
-    private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
+    
     private Map selectedItems;
         
     @FXML
