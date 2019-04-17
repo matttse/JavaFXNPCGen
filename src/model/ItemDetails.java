@@ -16,7 +16,7 @@ public class ItemDetails extends Equipment {
 
     public ItemDetails(String name, String description, String value, String experience) {
         this.name = new SimpleStringProperty(name);
-        this.description = new SimpleStringProperty(value);
+        this.description = new SimpleStringProperty(description);
         this.value = new SimpleStringProperty(value);
         this.experience = new SimpleStringProperty(experience);
     }
