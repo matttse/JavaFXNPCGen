@@ -73,53 +73,53 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label layoutX="50.0" layoutY="374.0" text="Charisma" GridPane.columnIndex="5">
+            <Label layoutX="50.0" layoutY="374.0" text="Charisma" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label layoutX="50.0" layoutY="375.0" text="Wisdom" GridPane.columnIndex="4">
+            <Label layoutX="50.0" layoutY="375.0" text="Wisdom" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label layoutX="50.0" layoutY="382.0" text="Intelligence" GridPane.columnIndex="3">
+            <Label layoutX="50.0" layoutY="382.0" text="Intelligence" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label layoutX="50.0" layoutY="366.0" text="Constitution" GridPane.columnIndex="1">
+            <Label layoutX="50.0" layoutY="366.0" text="Constitution" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="50.0" layoutY="357.0" text="Strength">
+            <Label alignment="TOP_LEFT" layoutX="50.0" layoutY="357.0" text="Strength" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <Label layoutX="50.0" layoutY="373.0" text="Dexterity" GridPane.columnIndex="2">
+            <Label layoutX="50.0" layoutY="373.0" text="Dexterity" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </Label>
-            <TextField fx:id="strengthTextField" GridPane.rowIndex="1" />
-            <TextField fx:id="constitutionTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="dexterityTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="intelligenceTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="charismaTextField" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <TextField fx:id="wisdomTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="strengthTextField" GridPane.rowIndex="2" />
+            <TextField fx:id="constitutionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="dexterityTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="intelligenceTextField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="charismaTextField" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <TextField fx:id="wisdomTextField" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <columns>
-          <TableColumn prefWidth="237.0" text="Item Name" />
-          <TableColumn prefWidth="348.0" text="Description" />
-            <TableColumn prefWidth="128.0" text="Value" />
-            <TableColumn prefWidth="115.0" text="XP" />
+          <TableColumn fx:id="itemName" prefWidth="237.0" text="Item Name" />
+            <TableColumn fx:id="value" prefWidth="128.0" text="Value" />
+            <TableColumn fx:id="experience" prefWidth="115.0" text="XP" />
         </columns>
       </TableView>
    </children>

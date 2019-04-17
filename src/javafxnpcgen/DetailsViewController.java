@@ -6,7 +6,6 @@
 package javafxnpcgen;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +14,17 @@ import javafx.scene.control.TextField;
 import model.NPC;
 import model.ItemDetails;
 import dao.DatabaseController;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import model.Equipment;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import model.FileReading;
 
 /**
  * FXML Controller class
@@ -30,8 +38,7 @@ public class DetailsViewController implements Initializable {
     double price;
     String item;
     String listNameData;
-    private NPC selectionNPC;    
-    private Equipment equipmentList;
+    private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
@@ -43,8 +50,12 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField Name;
     @FXML private TextField Level;
     @FXML private TextArea Notes;
-    
-    ArrayList<ItemDetails> itemList = new ArrayList<ItemDetails>();
+    @FXML private TableView<ItemDetails> tableView;
+    @FXML private TableColumn<ItemDetails, String> itemNameCol;
+    @FXML private TableColumn<ItemDetails, String> valueCol;
+    @FXML private TableColumn<ItemDetails, String> experienceCol;
+    private List<String[]> itemList;
+    protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
 
     DatabaseController db; //create new DatabaseController object
 
@@ -59,7 +70,7 @@ public class DetailsViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {            
             //open the database connection
             db.openConnection();
-        
+            
     } 
     @FXML
     private void exit(ActionEvent event) {
@@ -79,11 +90,43 @@ public class DetailsViewController implements Initializable {
         charismaTextField.setText(npc.getCharisma());
         Notes.setText(npc.getNotes());
         
+        itemNameCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("itemName"));
+        valueCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("value"));
+        experienceCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("experience"));
+            
+        tableView.setItems(getItems());
+        tableView.setEditable(true);
+        valueCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        experienceCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        
     }
     
-    public void setEquipmentList(Equipment itemList) {
-        equipmentList.setItemList(itemList.getItemList());
+    public ObservableList<ItemDetails> getItems() {
+        
+        FileReading readLocalFiles = new FileReading();
+        
+        try {
+            itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
+        } catch (IOException ex) {
+            Logger.getLogger(DetailsViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+            for (int i = 0; i < 1; i++) {
+                String[] get = itemList.get(i);
+                
+                for (int j = 0; j < get.length; j++) {
+                    items.add(new ItemDetails(get[j],"",""));
+//                    String equipment_name = get[j];
+//                    selectedItems.put(j, get[j]);
+                    System.out.println(items.get(j));
+                    
+                }
+                
+            }
+            
+        return items;
     }
+    
+    
     
     
     

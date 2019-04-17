@@ -14,6 +14,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,11 +24,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import model.Equipment;
 import model.NPC;
 import model.RandomNameGen;
 import model.FileReading;
+import model.ItemDetails;
 import model.Monster;
 
 /**
@@ -40,11 +47,7 @@ public class FXMLDocumentController implements Initializable {
     private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
     private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
     private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
-    private List<String[]> itemList;
     private Map selectedItems;
-    protected ArrayList<String> items = new ArrayList();
-    @FXML
-    private Label label;
         
     @FXML
     private ComboBox<Integer> NumberOfNPCsSelect;
@@ -56,7 +59,6 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<String> AbilityScore;
     @FXML
     private ComboBox<Integer> Modifier;
-    
     @FXML
     private void resetButtonAction(ActionEvent event) {
         NumberOfNPCsSelect.setValue(1);
@@ -88,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
             DetailsViewController controller = loader.getController();
             
             controller.initData(selectedNPC);
-            controller.setEquipmentList(equipmentList);
+//            controller.setEquipmentList(equipmentList);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -179,25 +181,6 @@ public class FXMLDocumentController implements Initializable {
             }
             
             System.out.println(monsterList);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
-            for (int i = 0; i < 1; i++) {
-                String[] get = itemList.get(i);
-                
-                for (int j = 0; j < get.length; j++) {
-                    items.add(j, get[j]);
-//                    String equipment_name = get[j];
-//                    selectedItems.put(j, get[j]);
-                    System.out.println(items.get(j));
-                    
-                }
-                
-            }
-            
-
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }

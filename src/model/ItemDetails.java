@@ -5,34 +5,42 @@
  */
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author tsemd
  */
 public class ItemDetails extends Equipment {
-    private String Description;
-    private String ItemValue;
-    
-    public ItemDetails(String item_name, String item_description, String quantity, String value, int priority, String name) {
-        super(name);        
-        this.Description = item_description;        
-        this.ItemValue = value;        
-    }
-    
-    public String getDescription() {
-            return Description;
+    private SimpleStringProperty name, value, experience;
+
+    public ItemDetails(String name, String value, String experience) {
+        this.name = new SimpleStringProperty(name);
+        this.value = new SimpleStringProperty(value);
+        this.experience = new SimpleStringProperty(experience);
     }
 
-    public void setDescription(String Description) {
-            this.Description = Description;
+    public String getName() {
+        return name.get();
     }
 
-    public String getItemValue() {
-            return ItemValue;
+    public void setName(SimpleStringProperty name) {
+        this.name = name;
     }
 
-    public void setItemValue(String ItemValue) {
-            this.ItemValue = ItemValue;
+    public String getValue() {
+        return value.get();
     }
-	
+
+    public void setValue(SimpleStringProperty value) {
+        this.value = value;
+    }
+
+    public String getExperience() {
+        return experience.get();
+    }
+
+    public void setExperience(SimpleStringProperty experience) {
+        this.experience = experience;
+    }
 }
