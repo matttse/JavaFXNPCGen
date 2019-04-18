@@ -43,7 +43,7 @@ import model.Monster;
 public class FXMLDocumentController implements Initializable {
     Monster selectedNPC = new Monster();
     private Equipment equipmentList;
-    private final String CSV_MONSTER_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\monster_name.csv";
+    private final String CSV_MONSTER_FILE_PATH = ".\\monster_name.csv";
     
     private Map selectedItems;
         

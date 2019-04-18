@@ -38,9 +38,9 @@ import model.FileReading;
 public class DetailsViewController implements Initializable {
     
 
-    private final String CSV_MAGIC_ITEM_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\magic_item_name.csv";
-    private final String CSV_EQUIPMENT_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\equipment_name.csv";
-    private final String CSV_SPELL_FILE_PATH = "C:\\workspace\\JavaFXNPCGen\\spell_name.csv";
+    private final String CSV_MAGIC_ITEM_FILE_PATH = ".\\magic_item_name.csv";
+    private final String CSV_EQUIPMENT_FILE_PATH = ".\\equipment_name.csv";
+    private final String CSV_SPELL_FILE_PATH = ".\\spell_name.csv";
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
