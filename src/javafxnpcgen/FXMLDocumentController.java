@@ -73,21 +73,25 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void GenerateNPCButton(ActionEvent event) {
-        getDataFromFields();
+//        getDataFromFields();
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("DetailsView.fxml"));
-            
-            Parent detailScene = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Character Details");
-            stage.setScene(new Scene(detailScene));
-            stage.show();
-            
-            // access the controller and call a method
-            DetailsViewController controller = loader.getController();
-            
-            controller.initData(selectedNPC);
+            for (int i = 0; i < NumberOfNPCsSelect.getValue(); i++) {
+                getDataFromFields();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("DetailsView.fxml"));
+
+                Parent detailScene = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Character Details");
+                stage.setScene(new Scene(detailScene));
+                stage.show();
+
+                // access the controller and call a method
+                DetailsViewController controller = loader.getController();
+
+                controller.initData(selectedNPC);  
+            }
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

@@ -120,17 +120,17 @@ public class DetailsViewController implements Initializable {
         for (int i = 0; i < 1; i++) {
             String[] get = itemList.get(i);
             Collections.shuffle(Arrays.asList(get));
-            int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.round(Double.valueOf(get.length/20)));
-            for (int j = 1; j < randomNumberOfItems; j++) {
+            int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.round(Double.valueOf(20)));
+            for (int j = 0; j < randomNumberOfItems; j++) {
                 String name = get[j];
                 items.add(new ItemDetails(
                         name,
-                        Integer.toString(j).concat(" test"),
+                        "",
                         String.valueOf(Math.round(
-                                (getRandomInt(rand, 1000, 10000)+99)*100
+                                (getRandomInt(rand, 1, 100)+99)*100
                         )),
                         String.valueOf(Math.round(
-                                (getRandomInt(rand, 1000, 10000)+99)*100
+                                (getRandomInt(rand, 1, 100)+99)*100
                         ))
                     )
                 );                    
