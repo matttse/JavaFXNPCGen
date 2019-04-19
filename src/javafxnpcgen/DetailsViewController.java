@@ -29,7 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import static javafxnpcgen.FXMLDocumentController.getRandomInt;
-import model.FileReading;
+import service.FileReading;
 
 /**
  * FXML Controller class
@@ -38,10 +38,11 @@ import model.FileReading;
  */
 public class DetailsViewController implements Initializable {
     
-
+    //local reference via windows PC to web crawled items
     private final String CSV_MAGIC_ITEM_FILE_PATH = ".\\magic_item_name.csv";
     private final String CSV_EQUIPMENT_FILE_PATH = ".\\equipment_name.csv";
     private final String CSV_SPELL_FILE_PATH = ".\\spell_name.csv";
+    //ability score fields
     @FXML private TextField strengthTextField;
     @FXML private TextField constitutionTextField;
     @FXML private TextField dexterityTextField;
@@ -53,6 +54,7 @@ public class DetailsViewController implements Initializable {
     @FXML private TextField Name;
     @FXML private TextField Level;
     @FXML private TextArea Notes;
+    //item table fields
     @FXML private TableView<ItemDetails> tableView;
     @FXML private TableColumn<ItemDetails, String> itemNameCol;
     @FXML private TableColumn<ItemDetails, String> itemDescriptionCol;
@@ -82,7 +84,7 @@ public class DetailsViewController implements Initializable {
     private void exit(ActionEvent event) {
         System.exit(0);
     }
-
+    //callable init from main menu
     public void initData(NPC npc) {        
         ArmorClass.setText(npc.getArmorClass());
         HitPoints.setText(npc.getHitPoints());
@@ -100,14 +102,18 @@ public class DetailsViewController implements Initializable {
         itemDescriptionCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("description"));
         valueCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("value"));
         experienceCol.setCellValueFactory(new PropertyValueFactory<ItemDetails, String>("experience"));
-            
+        //set items from randomization and read
         tableView.setItems(getItems());
+        //allow tables to be editable
         tableView.setEditable(true);
+        //only allows edits for val and xp
         valueCol.setCellFactory(TextFieldTableCell.forTableColumn());
         experienceCol.setCellFactory(TextFieldTableCell.forTableColumn());
         
     }
-    
+    /*
+    * method to collect and store items
+    */    
     public ObservableList<ItemDetails> getItems() {
         
         FileReading readLocalFiles = new FileReading();
@@ -116,10 +122,10 @@ public class DetailsViewController implements Initializable {
             itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
             itemList.addAll(readLocalFiles.readScanner(CSV_MAGIC_ITEM_FILE_PATH));
             itemList.addAll(readLocalFiles.readScanner(CSV_SPELL_FILE_PATH));
-            System.out.print(itemList.size());
+            
         } catch (IOException ex) {
             Logger.getLogger(DetailsViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        }//end try
         
         
         for (int i = 0; i < 1; i++) {
@@ -128,7 +134,7 @@ public class DetailsViewController implements Initializable {
             for (int start = 0; start < get.length; start++) {
                 String name = get[start];
                 itemNameComboBox.getItems().add(name);
-            }
+            }//end for to loop through all items
             //roll for random number and random number of items
             Collections.shuffle(Arrays.asList(get));
             int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.round(Double.valueOf(20)));
@@ -145,11 +151,11 @@ public class DetailsViewController implements Initializable {
                                 (getRandomInt(rand, 1, 100)+99)*100
                         ))
                     )
-                );                    
+                ); //end item list addition                   
 
-            }
+            }//end item generation default
 
-        }
+        }//end for to get into csv
             
         return items;
     }   

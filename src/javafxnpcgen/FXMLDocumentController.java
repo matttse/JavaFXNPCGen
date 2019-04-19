@@ -7,15 +7,11 @@ package javafxnpcgen;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,17 +19,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import model.Equipment;
-import model.NPC;
-import model.RandomNameGen;
-import model.FileReading;
-import model.ItemDetails;
+import service.RandomNameGen;
+import service.FileReading;
 import model.Monster;
 
 /**
@@ -41,11 +29,10 @@ import model.Monster;
  * @author tsemd
  */
 public class FXMLDocumentController implements Initializable {
+    //instantiate the template NPC
     Monster selectedNPC = new Monster();
-    private Equipment equipmentList;
-    private final String CSV_MONSTER_FILE_PATH = ".\\monster_name.csv";
     
-    private Map selectedItems;
+    private final String CSV_MONSTER_FILE_PATH = ".\\monster_name.csv";
         
     @FXML
     private ComboBox<Integer> NumberOfNPCsSelect;
@@ -70,10 +57,9 @@ public class FXMLDocumentController implements Initializable {
     private void exit(ActionEvent event) {
         System.exit(0);
     }
-    
+    //button for generating NPC
     @FXML
     private void GenerateNPCButton(ActionEvent event) {
-//        getDataFromFields();
         try {
             for (int i = 0; i < NumberOfNPCsSelect.getValue(); i++) {
                 getDataFromFields();
@@ -96,7 +82,7 @@ public class FXMLDocumentController implements Initializable {
             System.err.println(e.getMessage());
         }
     }
-    
+    //defaults
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setData();
@@ -106,7 +92,7 @@ public class FXMLDocumentController implements Initializable {
         AbilityScore.setValue("1");//1, 2–3, 4–5, 6–7, 8–9, 10–11, 12–13, 14–15, 16–17, 18–19, 20–21, 22–23, 24–25, 26–27, 28–29, 30
         Modifier.setValue(0);//+0, +1, +2, +3, +4, +5, +6, +7, +8, +9, +10
     }
-    
+    //set template
     public void getDataFromFields() {
         
         selectedNPC.setLevel(String.valueOf(LevelSelect.getSelectionModel().getSelectedIndex()+2));
@@ -166,10 +152,12 @@ public class FXMLDocumentController implements Initializable {
         selectedNPC.setName(name.generateName());
         selectedNPC.setNotes(ClassSelect.getValue());
     }
+    //generates random int function for reuse
     public static int getRandomInt(Random random, int min, int max)
     {
       return random.nextInt(max - min + 1) + min;
     }
+    //set defaults from file for class and fillable buttons
     public void setData(){
         FileReading readLocalFiles = new FileReading();
         try {
