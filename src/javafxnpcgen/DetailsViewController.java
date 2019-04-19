@@ -161,13 +161,17 @@ public class DetailsViewController implements Initializable {
      * This method adds items to table
      * */
     public void deleteItemButtonPushed(){
-        ItemDetails selectedItem = new ItemDetails(
-                itemNameTextField.getText(),
-                itemDescriptionTextField.getText(),
-                experienceTextField.getText(),
-                valueTextField.getText()
-        );
-        tableView.getItems().remove(selectedItem);
+        ObservableList<ItemDetails> selectedRows, allItems;
+        allItems = tableView.getItems();
+        
+        //this gives us the rows that were selected
+        selectedRows = tableView.getSelectionModel().getSelectedItems();
+        
+        //loop over the selected rows and remove the Person objects from the table
+        for (ItemDetails item : selectedRows)
+        {
+            allItems.remove(item);
+        }
         
     }
 }
