@@ -21,6 +21,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -61,7 +62,7 @@ public class DetailsViewController implements Initializable {
     protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
     
     // manually add isntance varaibles to create new itemdetail object
-    @FXML private TextField itemNameTextField;
+    @FXML private ComboBox<String> itemNameComboBox;
     @FXML private TextField itemDescriptionTextField;
     @FXML private TextField experienceTextField;
     @FXML private TextField valueTextField;
@@ -119,12 +120,21 @@ public class DetailsViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(DetailsViewController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
+        
         for (int i = 0; i < 1; i++) {
             String[] get = itemList.get(i);
+            //store all items for later addition
+            for (int start = 0; start < get.length; start++) {
+                String name = get[start];
+                itemNameComboBox.getItems().add(name);
+            }
+            //roll for random number and random number of items
             Collections.shuffle(Arrays.asList(get));
             int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.round(Double.valueOf(20)));
             for (int j = 0; j < randomNumberOfItems; j++) {
                 String name = get[j];
+                
                 items.add(new ItemDetails(
                         name,
                         "",
@@ -148,7 +158,7 @@ public class DetailsViewController implements Initializable {
      * */
     public void newItemButtonPushed(){
         ItemDetails newItem = new ItemDetails(
-                itemNameTextField.getText(),
+                itemNameComboBox.getValue(),
                 itemDescriptionTextField.getText(),
                 experienceTextField.getText(),
                 valueTextField.getText()
