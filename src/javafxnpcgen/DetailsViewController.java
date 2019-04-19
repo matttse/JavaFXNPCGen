@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import model.NPC;
 import model.ItemDetails;
-import dao.DatabaseController;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +21,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -59,20 +59,22 @@ public class DetailsViewController implements Initializable {
     @FXML private TableColumn<ItemDetails, String> experienceCol;
     private List<String[]> itemList;
     protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
-
-    DatabaseController db; //create new DatabaseController object
-
-    public DetailsViewController() {
-        db = new DatabaseController(); //initialize new DatabaseController object
-
-    }
+    
+    // manually add isntance varaibles to create new itemdetail object
+    @FXML private TextField itemNameTextField;
+    @FXML private TextField itemDescriptionTextField;
+    @FXML private TextField experienceTextField;
+    @FXML private TextField valueTextField;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {            
-            //open the database connection
-            db.openConnection();
+            
+        //This will allow the table to select multiple rows at once
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
             
     } 
     @FXML
@@ -141,6 +143,32 @@ public class DetailsViewController implements Initializable {
             
         return items;
     }   
+    /**
+     * This method adds items to table
+     * */
+    public void newItemButtonPushed(){
+        ItemDetails newItem = new ItemDetails(
+                itemNameTextField.getText(),
+                itemDescriptionTextField.getText(),
+                experienceTextField.getText(),
+                valueTextField.getText()
+        );
+        tableView.getItems().add(newItem);
+        
+    }
     
+    /**
+     * This method adds items to table
+     * */
+    public void deleteItemButtonPushed(){
+        ItemDetails selectedItem = new ItemDetails(
+                itemNameTextField.getText(),
+                itemDescriptionTextField.getText(),
+                experienceTextField.getText(),
+                valueTextField.getText()
+        );
+        tableView.getItems().remove(selectedItem);
+        
+    }
 }
 
