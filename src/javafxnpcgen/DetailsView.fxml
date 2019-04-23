@@ -146,6 +146,7 @@
             <Button mnemonicParsing="false" onAction="#deleteItemButtonPushed" text="Delete Item" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#newItemButtonPushed" text="Add Item" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <ComboBox fx:id="itemNameComboBox" editable="true" prefWidth="150.0" promptText="Item Name" />
+            <Button mnemonicParsing="false" onAction="#saveToFileButtonPushed" text="Save NPC" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

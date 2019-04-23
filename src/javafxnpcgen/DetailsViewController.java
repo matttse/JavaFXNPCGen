@@ -28,8 +28,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import model.Monster;
 import service.Randomizer;
 import service.FileReading;
+import service.FileWriting;
 
 /**
  * FXML Controller class
@@ -62,14 +64,17 @@ public class DetailsViewController implements Initializable {
     @FXML private TableColumn<ItemDetails, String> experienceCol;
     private List<String[]> itemList;
     protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
-    
+    //instantiate object classes
     Randomizer letsRoll = new Randomizer();
     FileReading readLocalFiles = new FileReading();
+    FileWriting saveNPC = new FileWriting();
+    Monster selectedNPC = new Monster();
     // manually add isntance varaibles to create new itemdetail object
     @FXML private ComboBox<String> itemNameComboBox;
     @FXML private TextField itemDescriptionTextField;
     @FXML private TextField experienceTextField;
     @FXML private TextField valueTextField;
+
     
     /**
      * Initializes the controller class.
@@ -80,7 +85,17 @@ public class DetailsViewController implements Initializable {
         //This will allow the table to select multiple rows at once
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
-            
+//        selectedNPC.setLevel();
+//        selectedNPC.setHitPoints();
+//        selectedNPC.setArmorClass(();
+//        selectedNPC.setName();
+//        selectedNPC.setNotes();
+//        selectedNPC.setCharisma();
+//        selectedNPC.setConstitution();
+//        selectedNPC.setDexterity();
+//        selectedNPC.setIntelligence();
+//        selectedNPC.setStrength();
+//        selectedNPC.setWisdom();
     } 
     @FXML
     private void exit(ActionEvent event) {
@@ -111,7 +126,7 @@ public class DetailsViewController implements Initializable {
         //only allows edits for val and xp
         valueCol.setCellFactory(TextFieldTableCell.forTableColumn());
         experienceCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        
+        selectedNPC = (Monster) npc;
     }
     /*
     * method to collect and store items
@@ -192,5 +207,47 @@ public class DetailsViewController implements Initializable {
         }
         
     }
+    
+    @FXML
+    private void saveToFileButtonPushed(ActionEvent event) {
+        ObservableList<ItemDetails> allCharacterItems = tableView.getItems();
+        int itemListLength = allCharacterItems.size();
+        String[] itemNames = new String[itemListLength];
+        String[] itemDescriptions = new String[itemListLength];;
+        String[] itemXP = new String[itemListLength];;
+        String[] itemValue = new String[itemListLength];;
+        for (int i = 0; i < itemListLength; i++) {
+//            System.out.println(allCharacterItems.get(i));
+//            System.out.println(allCharacterItems.get(i).getName());
+//            System.out.println(allCharacterItems.get(i).getDescription());
+//            System.out.println(allCharacterItems.get(i).getExperience());
+//            System.out.println(allCharacterItems.get(i).getValue());
+            // only add items with names
+            if (allCharacterItems.get(i).getName().length() > 0) {
+                itemNames[i] = allCharacterItems.get(i).getName();
+                if (allCharacterItems.get(i).getDescription().length() > 0) {
+                    itemDescriptions[i] = allCharacterItems.get(i).getDescription();
+                } else {
+                    itemDescriptions[i] = "None Added";
+                }
+                if (allCharacterItems.get(i).getExperience().length() > 0) {
+                    itemXP[i] = allCharacterItems.get(i).getExperience();
+                } else {
+                    itemDescriptions[i] = "None Added";
+                }
+                if (allCharacterItems.get(i).getValue().length() > 0) {
+                    itemValue[i] = allCharacterItems.get(i).getValue();
+                } else {
+                    itemDescriptions[i] = "None Added";
+                }
+            }
+
+        }
+        
+        saveNPC.printing(itemNames, itemDescriptions, itemXP, itemValue, 
+                selectedNPC.getName(), selectedNPC.getArmorClass(), selectedNPC.getHitPoints(), selectedNPC.getLevel(), selectedNPC.getClassName(), selectedNPC.getNotes(),
+                selectedNPC.getStrength(), selectedNPC.getConstitution(), selectedNPC.getDexterity(), selectedNPC.getIntelligence(), selectedNPC.getWisdom(), selectedNPC.getCharisma());
+    }
+    
 }
 
