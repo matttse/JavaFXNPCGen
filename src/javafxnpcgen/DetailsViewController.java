@@ -84,18 +84,7 @@ public class DetailsViewController implements Initializable {
             
         //This will allow the table to select multiple rows at once
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        
-//        selectedNPC.setLevel();
-//        selectedNPC.setHitPoints();
-//        selectedNPC.setArmorClass(();
-//        selectedNPC.setName();
-//        selectedNPC.setNotes();
-//        selectedNPC.setCharisma();
-//        selectedNPC.setConstitution();
-//        selectedNPC.setDexterity();
-//        selectedNPC.setIntelligence();
-//        selectedNPC.setStrength();
-//        selectedNPC.setWisdom();
+
     } 
     @FXML
     private void exit(ActionEvent event) {

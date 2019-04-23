@@ -43,6 +43,16 @@ public class FileWriting implements Printing {
                 outputStream.println("HitPoints: "+HitPoints);
                 outputStream.println("Level: "+Level);
                 outputStream.println("Class: "+Class);
+                outputStream.println("Ability Score: ");
+                outputStream.println();
+		outputStream.println("Strength: " + Strength + 
+                        " Constitution: "+Constitution +
+                        " Dexterity: "+Dexterity +
+                        " Intelligence: "+Intelligence +
+                        " Wisdom: "+Wisdom +
+                        " Charisma: "+Charisma
+                        );
+                outputStream.println();
                 outputStream.println("Notes: "+Notes);
 		outputStream.println();
 		outputStream.println("Items:");
