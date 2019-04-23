@@ -20,7 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import service.RandomNameGen;
+import service.Randomizer;
 import service.FileReading;
 import model.Monster;
 
@@ -31,7 +31,7 @@ import model.Monster;
 public class FXMLDocumentController implements Initializable {
     //instantiate the template NPC
     Monster selectedNPC = new Monster();
-    
+    Randomizer letsRoll = new Randomizer();
     private final String CSV_MONSTER_FILE_PATH = ".\\monster_name.csv";
         
     @FXML
@@ -99,21 +99,21 @@ public class FXMLDocumentController implements Initializable {
         
         Random rand = new Random();
         if (AbilityScore.getSelectionModel().getSelectedIndex() == -1) {
-            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, 1, 18)));
-            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, 1, 18)));
-            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, 1, 18)));
-            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, 1, 18)));
-            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, 1, 18)));
-            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, 1, 18)));
+            selectedNPC.setCharisma(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
+            selectedNPC.setConstitution(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
+            selectedNPC.setDexterity(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
+            selectedNPC.setIntelligence(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
+            selectedNPC.setStrength(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
+            selectedNPC.setWisdom(String.valueOf(letsRoll.getRandomInt(rand, 1, 18)));
         } else {
             int high = 18;
             int low = Modifier.getSelectionModel().getSelectedItem()+1;
-            selectedNPC.setCharisma(String.valueOf(getRandomInt(rand, low, high)));
-            selectedNPC.setConstitution(String.valueOf(getRandomInt(rand, low, high)));
-            selectedNPC.setDexterity(String.valueOf(getRandomInt(rand, low, high)));
-            selectedNPC.setIntelligence(String.valueOf(getRandomInt(rand, low, high)));
-            selectedNPC.setStrength(String.valueOf(getRandomInt(rand, low, high)));
-            selectedNPC.setWisdom(String.valueOf(getRandomInt(rand, low, high)));
+            selectedNPC.setCharisma(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
+            selectedNPC.setConstitution(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
+            selectedNPC.setDexterity(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
+            selectedNPC.setIntelligence(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
+            selectedNPC.setStrength(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
+            selectedNPC.setWisdom(String.valueOf(letsRoll.getRandomInt(rand, low, high)));
         }
         
         switch (selectedNPC.getConstitution()) {
@@ -122,7 +122,7 @@ public class FXMLDocumentController implements Initializable {
                     int bonus = 1;
                     selectedNPC.setHitPoints(
                             String.valueOf(
-                                    (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                                    (LevelSelect.getSelectionModel().getSelectedItem() * letsRoll.getRandomInt(rand, 2, 10) + bonus)
                             )
                     );      break;
                 }
@@ -131,32 +131,28 @@ public class FXMLDocumentController implements Initializable {
                     int bonus = 2;
                     selectedNPC.setHitPoints(
                             String.valueOf(
-                                    (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10) + bonus)
+                                    (LevelSelect.getSelectionModel().getSelectedItem() * letsRoll.getRandomInt(rand, 2, 10) + bonus)
                             )
                     );      break;
                 }
             default:
                 selectedNPC.setHitPoints(
                         String.valueOf(
-                                (LevelSelect.getSelectionModel().getSelectedItem() * getRandomInt(rand, 2, 10))
+                                (LevelSelect.getSelectionModel().getSelectedItem() * letsRoll.getRandomInt(rand, 2, 10))
                         )
                 );  break;
         }
         selectedNPC.setArmorClass("+".concat(
                 Integer.toString(
-                        getRandomInt(rand, 2, 10) + Modifier.getSelectionModel().getSelectedItem()
+                        letsRoll.getRandomInt(rand, 2, 10) + Modifier.getSelectionModel().getSelectedItem()
                 )
             )
         );
-        RandomNameGen name = new RandomNameGen();
-        selectedNPC.setName(name.generateName());
+        
+        selectedNPC.setName(letsRoll.generateName());
         selectedNPC.setNotes(ClassSelect.getValue());
     }
-    //generates random int function for reuse
-    public static int getRandomInt(Random random, int min, int max)
-    {
-      return random.nextInt(max - min + 1) + min;
-    }
+
     //set defaults from file for class and fillable buttons
     public void setData(){
         FileReading readLocalFiles = new FileReading();

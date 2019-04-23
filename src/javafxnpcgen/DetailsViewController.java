@@ -28,7 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import static javafxnpcgen.FXMLDocumentController.getRandomInt;
+import service.Randomizer;
 import service.FileReading;
 
 /**
@@ -62,6 +62,8 @@ public class DetailsViewController implements Initializable {
     @FXML private TableColumn<ItemDetails, String> experienceCol;
     private List<String[]> itemList;
     protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
+    
+    Randomizer letsRoll = new Randomizer();
     
     // manually add isntance varaibles to create new itemdetail object
     @FXML private ComboBox<String> itemNameComboBox;
@@ -137,7 +139,7 @@ public class DetailsViewController implements Initializable {
             }//end for to loop through all items
             //roll for random number and random number of items
             Collections.shuffle(Arrays.asList(get));
-            int randomNumberOfItems = getRandomInt(rand, 1, (int) Math.round(Double.valueOf(20)));
+            int randomNumberOfItems = letsRoll.getRandomInt(rand, 1, (int) Math.round(Double.valueOf(20)));
             for (int j = 0; j < randomNumberOfItems; j++) {
                 String name = get[j];
                 
@@ -145,10 +147,10 @@ public class DetailsViewController implements Initializable {
                         name,
                         "",
                         String.valueOf(Math.round(
-                                (getRandomInt(rand, 1, 100)+99)*100
+                                (letsRoll.getRandomInt(rand, 1, 100)+99)*100
                         )),
                         String.valueOf(Math.round(
-                                (getRandomInt(rand, 1, 100)+99)*100
+                                (letsRoll.getRandomInt(rand, 1, 100)+99)*100
                         ))
                     )
                 ); //end item list addition                   
