@@ -32,6 +32,7 @@ public class FXMLDocumentController implements Initializable {
     //instantiate the template NPC
     Monster selectedNPC = new Monster();
     Randomizer letsRoll = new Randomizer();
+    FileReading readLocalFiles = new FileReading();
     private final String CSV_MONSTER_FILE_PATH = ".\\monster_name.csv";
         
     @FXML
@@ -154,8 +155,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     //set defaults from file for class and fillable buttons
-    public void setData(){
-        FileReading readLocalFiles = new FileReading();
+    public void setData(){        
         try {
             List<String[]> monsterList = readLocalFiles.readScanner(CSV_MONSTER_FILE_PATH);
             for (int i = 0; i < 1; i++) {

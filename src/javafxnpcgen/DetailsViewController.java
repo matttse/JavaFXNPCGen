@@ -64,7 +64,7 @@ public class DetailsViewController implements Initializable {
     protected ObservableList<ItemDetails> items = FXCollections.observableArrayList();
     
     Randomizer letsRoll = new Randomizer();
-    
+    FileReading readLocalFiles = new FileReading();
     // manually add isntance varaibles to create new itemdetail object
     @FXML private ComboBox<String> itemNameComboBox;
     @FXML private TextField itemDescriptionTextField;
@@ -118,7 +118,7 @@ public class DetailsViewController implements Initializable {
     */    
     public ObservableList<ItemDetails> getItems() {
         
-        FileReading readLocalFiles = new FileReading();
+        
         Random rand = new Random();
         try {
             itemList = readLocalFiles.readScanner(CSV_EQUIPMENT_FILE_PATH);
