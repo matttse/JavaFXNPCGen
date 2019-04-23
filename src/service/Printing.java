@@ -12,7 +12,9 @@ package service;
 public interface Printing 
 {
 	//Declaring the printing method
-	public void printing(String[] bought, String[] notBought, String Name, Double[] boughtPrice, Double[] notBoughtPrice,
-			Integer[] boughtQuantity, Integer[] notBoughtQuantity, Double budget, Double moneyInPocket, String[] items, Integer[] priorities);
+	public void printing(String[] itemName, String[] itemDescription, String[] itemExperience, String[] itemValue,
+                String characterName, String ArmorClass, String HitPoints, String Level, String Class, String Notes,
+                String Strength, String Constitution, String Dexterity, String Intelligence, String Wisdom, String Charisma
+                );
 	
 }

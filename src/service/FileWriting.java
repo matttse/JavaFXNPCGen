@@ -7,7 +7,6 @@ package service;
 //Importing the packages for writing to a file and throwing an exception if it can't open a file
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 
 /**
  *
@@ -15,14 +14,13 @@ import java.text.DecimalFormat;
  */
 public class FileWriting implements Printing {
 	//Declaring the method for printing to a file
-	public void printing(String[] bought, String[] notBought, String Name, Double[] boughtPrice, Double[] notBoughtPrice,
-							Integer[] boughtQuantity, Integer[] notBoughtQuantity, Double budget, Double moneyInPocket,
-							String[] items, Integer[] priorities){
+	public void printing(String[] itemName, String[] itemDescription, String[] itemExperience, String[] itemValue,
+                String characterName, String ArmorClass, String HitPoints, String Level, String Class, String Notes,
+                String Strength, String Constitution, String Dexterity, String Intelligence, String Wisdom, String Charisma){
 		
-		DecimalFormat df = new DecimalFormat("#.##");
 		
 		//Declaring the filename to be written out
-		String filename = "character.txt";
+		String filename = characterName+"_character.txt";
 	
 		//Instantiating a PrintWriter class used for writing out to the file
 		PrintWriter outputStream = null;
@@ -39,46 +37,28 @@ public class FileWriting implements Printing {
 			System.exit(0);
 		}
 		
-		//Writing into the file the user's name and their budget before purchasing
-		outputStream.println(Name);
-		outputStream.println("Total budget:"+df.format(budget));
+		//Writing into the file
+		outputStream.println("Name: "+characterName);
+                outputStream.println("ArmorClass: "+ArmorClass);
+                outputStream.println("HitPoints: "+HitPoints);
+                outputStream.println("Level: "+Level);
+                outputStream.println("Class: "+Class);
+                outputStream.println("Notes: "+Notes);
 		outputStream.println();
-		outputStream.println("Original shopping list:");
+		outputStream.println("Items:");
 		
-		//Writing out the original shopping list
-		for(int i = 0;i < items.length;i++)
+		//Writing out items
+		for(int i = 0;i < itemName.length;i++)
 		{
-			outputStream.println(items[i]+", priority: "+priorities[i]);
+			outputStream.println(itemName[i] +
+                                ", description: "+itemDescription[i] +
+                                ", experience: "+itemExperience[i] +
+                                ", value: "+itemValue[i]
+                        );
 		}
 		
 		outputStream.println();
-		outputStream.println("Items you bought:");
 	
-		//Writing out the bought items, quantity and price to the file
-		for(int i = 0;i < items.length;i++)
-		{
-			if(!bought[i].equals("hello"))
-			{
-				outputStream.println(bought[i]+" "+"x"+boughtQuantity[i]+" "+boughtPrice[i]);
-				//spent = spent + boughtPrice[i];
-			}
-		}
-		outputStream.println("");
-		outputStream.println("Items not bought:");
-	
-		//Writing out the not bought items, quantity and price to the file
-		for(int i = 0;i < items.length;i++)
-		{
-			if(!notBought[i].equals("hello"))
-			{
-				outputStream.println(notBought[i]+" "+"x"+notBoughtQuantity[i]+" "+notBoughtPrice[i]);
-			}
-		}
-	
-		outputStream.println();
-		
-		//Writing out the budget after purchasing
-		outputStream.println("Budget after shopping:"+df.format(moneyInPocket));
 		outputStream.close();
 		}
 	}
